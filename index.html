@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexora Security Monitor</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="monitor.css">
+</head>
+<body>
+
+<!-- ═══════════ LOGIN SCREEN ═══════════ -->
+<div id="loginScreen" class="login-screen">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="logo-mark">🛡️</div>
+      <div class="logo-text">
+        <div class="logo-title">NEXORA</div>
+        <div class="logo-sub">SECURITY MONITOR</div>
+      </div>
+    </div>
+    <h1 class="login-heading">Staff Sign In</h1>
+    <p class="login-sub">Security monitoring — authorized personnel only</p>
+
+    <div id="loginFlash"></div>
+
+    <form id="loginForm" onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="loginEmail" required autocomplete="email" placeholder="you@nexora.academy">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="loginPassword" required autocomplete="current-password" placeholder="••••••••">
+      </div>
+      <button type="submit" class="btn btn-primary btn-block" id="loginBtn">
+        <span>Sign In</span>
+      </button>
+    </form>
+
+    <div class="login-footer">
+      <a href="https://nexora-e-academy.vercel.app" target="_blank" rel="noopener">← Back to Academy</a>
+    </div>
+  </div>
+  <div class="login-bg"></div>
+</div>
+
+<!-- ═══════════ MAIN APP ═══════════ -->
+<div id="app" class="app hidden">
+
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo-mark small">🛡️</div>
+      <div>
+        <div class="brand-title">NEXORA</div>
+        <div class="brand-sub">SECURITY</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section">Overview</div>
+      <a class="nav-item active" data-page="dashboard">
+        <span class="nav-icon">📊</span> Dashboard
+      </a>
+
+      <div class="nav-section">Threats</div>
+      <a class="nav-item" data-page="events">
+        <span class="nav-icon">⚠️</span> Security Events
+      </a>
+      <a class="nav-item" data-page="blocked">
+        <span class="nav-icon">🚫</span> Blocked IPs
+        <span class="nav-badge" id="blockedBadge">0</span>
+      </a>
+
+      <div class="nav-section">Config</div>
+      <a class="nav-item" data-page="thresholds">
+        <span class="nav-icon">⚙️</span> Thresholds
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-chip">
+        <div class="user-avatar" id="userAvatar">?</div>
+        <div class="user-info">
+          <div class="user-name" id="userName">Loading...</div>
+          <div class="user-role" id="userRole">—</div>
+        </div>
+      </div>
+      <button class="btn btn-outline btn-sm btn-block" onclick="handleLogout()">Sign Out</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+        <h1 class="page-title" id="pageTitle">Dashboard</h1>
+      </div>
+      <div class="topbar-right">
+        <span class="live-dot" id="liveDot"></span>
+        <span class="live-label" id="liveLabel">Loading…</span>
+      </div>
+    </header>
+
+    <div class="content" id="content">
+      <!-- pages render here -->
+    </div>
+  </main>
+
+  <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+</div>
+
+<div id="modalRoot"></div>
+<div id="toastRoot" class="toast-root"></div>
+
+<script src="monitor.js"></script>
+</body>
+</html>
